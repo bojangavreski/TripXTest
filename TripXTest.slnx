@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Tests/">
+    <Project Path="TripXTest.Integration.Tests/TripXTest.Integration.Tests.csproj" />
+    <Project Path="TripXTest.Unit.Tests/TripXTest.Unit.Tests.csproj" />
+  </Folder>
+  <Project Path="TripXTest.API/TripXTest.API.csproj" />
+  <Project Path="TripXTest.Application/TripXTest.Application.csproj" />
+  <Project Path="TripXTest.Core/TripXTest.Core.csproj" />
+  <Project Path="TripXTest.Infrastructure/TripXTest.Infrastructure.csproj" />
+</Solution>
