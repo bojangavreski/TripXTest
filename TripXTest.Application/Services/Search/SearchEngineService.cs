@@ -1,4 +1,5 @@
-﻿using TripXTest.Application.Contracts.Providers;
+﻿using TripXTest.Application.Contracts.OfferPipeline;
+using TripXTest.Application.Contracts.Providers;
 using TripXTest.Application.Contracts.Search;
 using TripXTest.Application.Requests.Search;
 using TripXTest.Application.Responses.Search;
@@ -9,10 +10,13 @@ namespace TripXTest.Application.Services.Search
     public class SearchEngineService : ISearchEngineService
     {
         private readonly IEnumerable<ISearchProvider<TravelSearchResult>> _searchProviders;
+        private readonly IOfferPipeline _offerPipeline;
 
-        public SearchEngineService(IEnumerable<ISearchProvider<TravelSearchResult>> searchProviders)
+        public SearchEngineService(IEnumerable<ISearchProvider<TravelSearchResult>> searchProviders,
+                                   IOfferPipeline offerPipeline)
         {
             _searchProviders = searchProviders;
+            _offerPipeline = offerPipeline;
         }
 
         public async Task<TravelSearchResponse> SearchAsync(SearchRequest searchRequest)
@@ -20,17 +24,19 @@ namespace TripXTest.Application.Services.Search
             var searchTasks = _searchProviders.Select(
                                 provider => ExecuteProviderAsync(provider, searchRequest)).ToList();
 
-            var providedResults = (await Task.WhenAll(searchTasks))
+            var results = (await Task.WhenAll(searchTasks))
                                   .SelectMany(x => x)
-                                  .ToList(); 
+                                  .ToList();
+
+            var resultsDecoratedWithOffers = _offerPipeline.Apply(results, searchRequest);
 
             return new TravelSearchResponse
             {
                 SearchResultUid = Guid.NewGuid(),
                 FromDate = searchRequest.FromDate,
                 ToDate = searchRequest.ToDate,
-                Flights = providedResults.OfType<FlightSearchResult>().ToList(),
-                Hotels = providedResults.OfType<HotelSearchResult>().ToList()
+                Flights = resultsDecoratedWithOffers.OfType<FlightSearchResult>().ToList(),
+                Hotels = resultsDecoratedWithOffers.OfType<HotelSearchResult>().ToList()
             };
         }
 

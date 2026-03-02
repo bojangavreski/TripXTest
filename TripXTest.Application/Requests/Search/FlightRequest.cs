@@ -2,6 +2,6 @@
 {
     public record FlightRequest
     {
-        public string DepartureAirportCode { init; get; }
+        public string? DepartureAirportCode { init; get; }
     }
 }
