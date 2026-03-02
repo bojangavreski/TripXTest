@@ -1,11 +1,9 @@
-﻿using TripXTest.Core.Entities.Search;
+﻿using TripXTest.Core.Results;
 
 namespace TripXTest.Application.Responses.Search
 {
-    public record TravelSearchResponse
+    public class TravelSearchResponse
     {
-        public Guid SearchResultUid { get; init; }
-
         public DateTime FromDate { get; init; }
         
         public DateTime ToDate { get; init; }

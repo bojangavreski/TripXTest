@@ -1,7 +1,7 @@
 ﻿using TripXTest.Application.Contracts.OfferPipeline;
 using TripXTest.Application.Contracts.Offers;
 using TripXTest.Application.Requests.Search;
-using TripXTest.Core.Entities.Search;
+using TripXTest.Core.Results;
 
 namespace TripXTest.Application.Services.OfferPipeline
 {

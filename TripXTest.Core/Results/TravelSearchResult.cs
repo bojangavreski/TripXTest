@@ -1,6 +1,7 @@
-﻿using TripXTest.Core.Enums;
+﻿using TripXTest.Core.Entities;
+using TripXTest.Core.Enums;
 
-namespace TripXTest.Core.Entities.Search
+namespace TripXTest.Core.Results
 {
     public abstract class TravelSearchResult
     {

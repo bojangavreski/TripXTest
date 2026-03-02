@@ -1,7 +1,7 @@
 ﻿using TripXTest.Application.Contracts.Providers;
 using TripXTest.Application.Requests.Search;
-using TripXTest.Core.Entities.Search;
 using TripXTest.Core.Enums;
+using TripXTest.Core.Results;
 using TripXTest.Infrastructure.Contracts.External;
 
 namespace TripXTest.Infrastructure.Providers

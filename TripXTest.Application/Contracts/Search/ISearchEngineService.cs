@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TripXTest.Application.Requests.Search;
-using TripXTest.Application.Responses.Search;
+﻿using TripXTest.Application.Requests.Search;
+using TripXTest.Core.Entities;
 
 namespace TripXTest.Application.Contracts.Search
 { 
@@ -13,6 +10,13 @@ namespace TripXTest.Application.Contracts.Search
         /// </summary>
         /// <param name="searchRequest"></param>
         /// <returns></returns>
-        Task<TravelSearchResponse> SearchAsync(SearchRequest searchRequest);
+        Task<IEnumerable<Option>> SearchAsync(SearchRequest searchRequest);
+
+        /// <summary>
+        /// Retrieves search options that are previously searched
+        /// </summary>
+        /// <param name="searchResultUid"></param>
+        /// <returns></returns>
+        Option GetOptionByCode(string optionUid);
     }
 }
