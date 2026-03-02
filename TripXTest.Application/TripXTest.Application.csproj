@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\TripXTest.Core\TripXTest.Core.csproj" />
   </ItemGroup>
 
 </Project>
