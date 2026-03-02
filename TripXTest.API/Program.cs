@@ -5,6 +5,7 @@ using TripXTest.Application.Contracts.Offers;
 using TripXTest.Application.Contracts.Providers;
 using TripXTest.Application.Contracts.Search;
 using TripXTest.Application.Factories;
+using TripXTest.Application.Services;
 using TripXTest.Application.Services.OfferPipeline;
 using TripXTest.Application.Services.Offers;
 using TripXTest.Application.Services.Search;
@@ -26,9 +27,15 @@ namespace TripXTest.API
 
             builder.Services.AddMemoryCache();
 
+            builder.Services.AddSingleton<CompletitionBackgroundService>();
+            builder.Services.AddHostedService(sp => sp.GetRequiredService<CompletitionBackgroundService>());
+
+
             builder.Services.AddScoped(typeof(ITripXContext<>), typeof(TripXContext<>));
 
             builder.Services.AddScoped<ISearchEngineService, SearchEngineService>();
+            builder.Services.AddScoped<IBookingService, BookingService>();
+
 
             builder.Services.AddScoped<ISearchProvider<TravelSearchResult>, FlightProvider>();
             builder.Services.AddScoped<ISearchProvider<TravelSearchResult>, HotelProvider>();

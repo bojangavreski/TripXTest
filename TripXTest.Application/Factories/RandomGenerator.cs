@@ -17,5 +17,10 @@ namespace TripXTest.Application.Factories
             return (RandomNumberGenerator.GetInt32((int)min, (int)max) + 
                         RandomNumberGenerator.GetInt32(0, 100) / 100.0);
         }
+
+        public static int GenerateSleepTime()
+        {
+            return RandomNumberGenerator.GetInt32(30,61);
+        }
     }
 }
