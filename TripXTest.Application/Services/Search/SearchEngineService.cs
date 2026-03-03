@@ -27,16 +27,16 @@ namespace TripXTest.Application.Services.Search
         public async Task<IEnumerable<Option>> SearchAsync(SearchRequest searchRequest)
         {
             var searchTasks = _searchProviders.Select(
-                                provider => ExecuteProviderAsync(provider, searchRequest)).ToList();
+                                    provider => ExecuteProviderAsync(provider, searchRequest)).ToList();
 
             var results = (await Task.WhenAll(searchTasks))
-                                  .SelectMany(x => x)
-                                  .ToList();
+                                     .SelectMany(x => x)
+                                     .ToList();
 
             var resultsDecoratedWithOffers = _offerPipeline.Apply(results, searchRequest);
 
             var options = _optionFactory.CreateOption(resultsDecoratedWithOffers.OfType<FlightSearchResult>(),
-                                                        resultsDecoratedWithOffers.OfType<HotelSearchResult>());
+                                                      resultsDecoratedWithOffers.OfType<HotelSearchResult>());
 
             _tripXContext.SaveRange(options);
 
