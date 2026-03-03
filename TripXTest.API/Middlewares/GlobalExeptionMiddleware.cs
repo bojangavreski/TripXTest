@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
 
-namespace TripXTest.API
+namespace TripXTest.API.Middlewares
 {
     public class GlobalExeptionMiddleware(RequestDelegate next)
     {
