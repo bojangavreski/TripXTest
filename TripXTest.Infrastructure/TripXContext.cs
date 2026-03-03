@@ -30,12 +30,13 @@ namespace TripXTest.Infrastructure
                 Save(entity);
             }
         }
+
         public T Get(Guid uid)
         {
             return _cache.Get<T>(uid)!;
         }
 
-        T ITripXContext<T>.Get(string code)
+        public T Get(string code)
         {
             return _cache.Get<T>(code)!;
         }

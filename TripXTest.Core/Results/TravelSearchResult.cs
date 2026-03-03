@@ -7,6 +7,6 @@ namespace TripXTest.Core.Results
     {
         public abstract SearchResultType ResultType { get; }
 
-        public IEnumerable<ResultOffer> ResultOffers { get; set; } = [];
+        public IEnumerable<OfferType> ResultOffers { get; set; } = [];
     }
 }

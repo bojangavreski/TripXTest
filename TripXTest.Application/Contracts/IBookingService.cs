@@ -1,4 +1,5 @@
 ﻿using TripXTest.Application.Responses;
+using TripXTest.Core.Enums;
 
 namespace TripXTest.Application.Contracts
 {
@@ -8,6 +9,6 @@ namespace TripXTest.Application.Contracts
 
         public void CompleteBooking(string bookingCode);
 
-        public string CheckStatus(string bookingCode);
+        public BookingStatus CheckStatus(string bookingCode);
     }
 }

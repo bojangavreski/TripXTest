@@ -1,6 +1,6 @@
 ﻿namespace TripXTest.Core.Enums
 {
-    public enum BookingStatusEnum
+    public enum BookingStatus
     {
         Pending = 0,
         Complete = 1,

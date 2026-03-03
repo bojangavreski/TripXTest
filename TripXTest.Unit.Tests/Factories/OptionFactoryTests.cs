@@ -1,6 +1,6 @@
 using FluentAssertions;
 using TripXTest.Application.Factories;
-using TripXTest.Core.Entities;
+using TripXTest.Core.Enums;
 using TripXTest.Core.Results;
 using Xunit;
 
@@ -25,7 +25,7 @@ public class OptionFactoryTests
         };
         var hotels = new List<HotelSearchResult>
         {
-            new HotelSearchResult { HotelCode = 3151, ResultOffers = [new ResultOffer { Code = "LastMinuteHotel" }], City = "Skopje", DestinationCode = "SKP", HotelName = "Alexandar Square Boutique Hotel"},
+            new HotelSearchResult { HotelCode = 3151, ResultOffers = [OfferType.LastMinuteHotel], City = "Skopje", DestinationCode = "SKP", HotelName = "Alexandar Square Boutique Hotel"},
         };
 
         // Act
@@ -45,7 +45,7 @@ public class OptionFactoryTests
         var flights = new List<FlightSearchResult>();
         var hotels = new List<HotelSearchResult>
         {
-            new HotelSearchResult { HotelCode = 3151, ResultOffers = [new ResultOffer { Code = "HotelOnlyOffer" }], City = "Skopje", DestinationCode = "SKP", HotelName = "Alexandar Square Boutique Hotel"},
+            new HotelSearchResult { HotelCode = 3151, ResultOffers = [OfferType.LastMinuteHotel], City = "Skopje", DestinationCode = "SKP", HotelName = "Alexandar Square Boutique Hotel"},
         };
 
         // Act
@@ -68,8 +68,8 @@ public class OptionFactoryTests
         };
         var hotels = new List<HotelSearchResult>
         {
-            new HotelSearchResult { HotelCode = 3151, ResultOffers = [new ResultOffer { Code = "LastMinuteHotel" }], City = "Skopje", DestinationCode = "SKP", HotelName = "Alexandar Square Boutique Hotel"},
-            new HotelSearchResult { HotelCode = 8627, ResultOffers = [new ResultOffer { Code = "LastMinuteHotel" }], City = "Skopje", DestinationCode = "SKP", HotelName = "Skopje Marriott Hotel"},
+            new HotelSearchResult { HotelCode = 3151, ResultOffers = [OfferType.LastMinuteHotel], City = "Skopje", DestinationCode = "SKP", HotelName = "Alexandar Square Boutique Hotel"},
+            new HotelSearchResult { HotelCode = 8627, ResultOffers = [OfferType.LastMinuteHotel], City = "Skopje", DestinationCode = "SKP", HotelName = "Skopje Marriott Hotel"},
         };
 
         // Act

@@ -2,6 +2,7 @@ using FluentAssertions;
 using Moq;
 using TripXTest.Application.Contracts;
 using TripXTest.Application.Responses;
+using TripXTest.Core.Enums;
 using Xunit;
 
 namespace TripXTest.Unit.Tests.Services;
@@ -60,7 +61,7 @@ public class BookingServiceTests
     {
         // Arrange
         var bookingCode = "BK12345";
-        var expectedStatus = "Confirmed";
+        var expectedStatus = BookingStatus.Complete;
 
         _mockBookingService
             .Setup(x => x.CheckStatus(bookingCode))

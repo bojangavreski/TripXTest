@@ -38,14 +38,19 @@ namespace TripXTest.Application.Services
                 {
                     while (await _timer.WaitForNextTickAsync(stoppingToken))
                     {
-                        if (_restartSignal.CurrentCount > 0 && _bookingCodes.Count == 0)
+                        if (_restartSignal.CurrentCount > 0)
                         {
                             break; 
                         }
                         await using var scope = _scopeFactory.CreateAsyncScope();
                         var bookingService = scope.ServiceProvider.GetRequiredService<IBookingService>();
 
-                        bookingService.CompleteBooking(_bookingCodes.Pop());
+                        _bookingCodes.TryPop(out string? bookingCode);
+
+                        if(!string.IsNullOrEmpty(bookingCode))
+                        {
+                            bookingService.CompleteBooking(bookingCode);
+                        }
                     }
                 }
                 finally

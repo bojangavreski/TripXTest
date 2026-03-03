@@ -2,6 +2,7 @@
 using TripXTest.Application.Factories;
 using TripXTest.Application.Responses;
 using TripXTest.Core.Entities;
+using TripXTest.Core.Enums;
 
 namespace TripXTest.Application.Services
 {
@@ -24,12 +25,20 @@ namespace TripXTest.Application.Services
         {
             var option = _optionsContext.Get(optionCode);
 
+            if (option == null)
+            {
+                // Bad practice - in real application we would return a Result type or throw a custom exception
+                throw new Exception($"Option with code {optionCode} not found.");
+            }
+
+            var offers = option.Offers?.ToList();
+
             var booking = new Booking
             {
                 Code = RandomGenerator.GenerateCode(),
                 SleepTime = RandomGenerator.GenerateSleepTime(),
                 BookingTime = DateTime.Now,
-                Offers = option.Offers?.Select(x => x.Code).ToArray(),
+                Offers = offers
             };
 
             _bookingContext.Save(booking);
@@ -43,25 +52,25 @@ namespace TripXTest.Application.Services
             };
         }
 
-        public string CheckStatus(string bookingCode)
+        public BookingStatus CheckStatus(string bookingCode)
         {
-            var booking = _bookingContext.Get(bookingCode);
 
-            return booking.Status;
+            Booking? booking = _bookingContext.Get(bookingCode);
+            return booking == null ? throw new Exception($"Booking with code: {bookingCode} not found") : booking.Status;
         }
 
         public void CompleteBooking(string bookingCode)
         {
             var booking = _bookingContext.Get(bookingCode);
 
-            if (booking.Offers != null && booking.Offers.Contains("LastMinuteHotel"))
+            if (booking.Offers != null && booking.Offers.Contains(OfferType.LastMinuteHotel))
             {
-                booking.Status = "Failed";
+                booking.Status = BookingStatus.Failed;
 
             }
             else
             {
-                booking.Status = "Completed";
+                booking.Status = BookingStatus.Complete;
             }
 
             _bookingContext.Save(booking);

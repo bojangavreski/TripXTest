@@ -1,4 +1,6 @@
-﻿namespace TripXTest.Core.Entities
+﻿using TripXTest.Core.Enums;
+
+namespace TripXTest.Core.Entities
 {
     public class Booking : BaseEntity
     {
@@ -6,8 +8,8 @@
 
         public DateTime BookingTime { get; init; } = DateTime.Now;
 
-        public string Status { get; set; } = "Pending";
+        public BookingStatus Status { get; set; } = BookingStatus.Pending;
 
-        public string[]? Offers { get; set; }
+        public List<OfferType>? Offers { get; set; }
     }
 }

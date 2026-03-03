@@ -25,7 +25,7 @@ namespace TripXTest.API.Controllers
 
         [HttpGet]
         public ActionResult<Option> GetOptionByCode([FromQuery]
-                                                    [RegularExpression("^[A-Z]{3}$", ErrorMessage = "{0} must by in IATA airport code format")]
+                                                    [RegularExpression("^[0-9a-zA-Z]{6}$", ErrorMessage = "{0} must be 6 character alphanumeric code ")]
                                                     [Required(ErrorMessage = "{0} is required")] string optionCode)
         {
             return Ok(_searchEngineService.GetOptionByCode(optionCode));

@@ -11,15 +11,15 @@ namespace TripXTest.Infrastructure.Clients.Flight
     {
         private readonly IConfiguration _configuration;
 
-        private readonly string? _FLIGHTS_URL;
-        private readonly string? _DepartureAirportQueryParam;
-        private readonly string? _ArrivalAirportQueryParam;
+        private readonly string _FLIGHTS_URL;
+        private readonly string _DepartureAirportQueryParam;
+        private readonly string _ArrivalAirportQueryParam;
 
         public FlightClient(IConfiguration configuration)
         {
             _configuration = configuration;
-            var externalClientsSection = _configuration.GetSection("ExternalClients");
-            _FLIGHTS_URL = externalClientsSection["FlightUrl"] ?? String.Empty;
+            var externalClientsSection = _configuration.GetSection("ExternalApiClients");
+            _FLIGHTS_URL = externalClientsSection["FlightsUrl"] ?? String.Empty;
             _DepartureAirportQueryParam = externalClientsSection["DepartureAirportQueryParam"] ?? String.Empty;
             _ArrivalAirportQueryParam = externalClientsSection["ArrivalAirportQueryParam"] ?? String.Empty;
         }
@@ -28,7 +28,7 @@ namespace TripXTest.Infrastructure.Clients.Flight
         {
             using var httpClient = new HttpClient();
 
-            var builder = new UriBuilder("_FLIGHTS_URL");
+            var builder = new UriBuilder(_FLIGHTS_URL);
 
             var query = HttpUtility.ParseQueryString(builder.Query);
 
@@ -37,6 +37,7 @@ namespace TripXTest.Infrastructure.Clients.Flight
 
             builder.Query = query.ToString();
 
+            //This should be validated 
             var response = await httpClient.GetAsync(builder.ToString());
 
             return (await response.Content.ReadFromJsonAsync<IEnumerable<ExternalFlightDto>>())!;

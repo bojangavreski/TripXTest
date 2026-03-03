@@ -1,4 +1,6 @@
-﻿namespace TripXTest.Core.Entities
+﻿using TripXTest.Core.Enums;
+
+namespace TripXTest.Core.Entities
 {
     public class Option : BaseEntity
     {
@@ -10,6 +12,6 @@
 
         public required double Price { get; set; }
 
-        public IEnumerable<ResultOffer>? Offers { get; set; }
+        public IEnumerable<OfferType>? Offers { get; set; }
     }
 }

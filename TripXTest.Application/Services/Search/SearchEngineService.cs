@@ -43,9 +43,10 @@ namespace TripXTest.Application.Services.Search
             return options;
         }
 
-        public Option GetOptionByCode(string optionUid)
+        public Option GetOptionByCode(string optionCode)
         {
-            return _tripXContext.Get(optionUid);
+            Option? option = _tripXContext.Get(optionCode);
+            return option == null ? throw new Exception($"Option with code: {optionCode} not found") : option;
         }
 
         private async Task<IReadOnlyList<TravelSearchResult>> ExecuteProviderAsync(
