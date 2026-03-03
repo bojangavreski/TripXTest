@@ -56,7 +56,7 @@ namespace TripXTest.Application.Services
         {
 
             Booking? booking = _bookingContext.Get(bookingCode);
-            return booking == null ? throw new Exception($"Booking with code: {bookingCode} not found") : booking.Status.ToString();
+            return booking == null ? $"Booking with code: {bookingCode} not found" : booking.Status.ToString();
         }
 
         public void CompleteBooking(string bookingCode)

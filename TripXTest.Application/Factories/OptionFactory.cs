@@ -1,4 +1,5 @@
 ﻿using TripXTest.Core.Entities;
+using TripXTest.Core.Enums;
 using TripXTest.Core.Results;
 
 namespace TripXTest.Application.Factories
@@ -8,7 +9,16 @@ namespace TripXTest.Application.Factories
         public IEnumerable<Option> CreateOption(IEnumerable<FlightSearchResult> flights,
                                                 IEnumerable<HotelSearchResult> hotels)
         {
-            return (from flight in flights.DefaultIfEmpty()
+            // This validation voids SRP 
+            var hasHotelOnlyOffer = hotels.SelectMany(x => x.ResultOffers)
+                                    .Any(x => x.Equals(OfferType.HotelOnly));
+
+            if(!flights.Any() && !hasHotelOnlyOffer)
+            {
+                return [];
+            }
+
+            var options = (from flight in flights.DefaultIfEmpty()
                     from hotel in hotels
                     where hotel != null
                     select new Option
@@ -22,8 +32,8 @@ namespace TripXTest.Application.Factories
                         Offers = hotel.ResultOffers.Select(x => x.ToString()).Concat(
                                             flight != null ? flight.ResultOffers.Select(x => x.ToString()) : []).ToList()
                     }).ToList();
-            
-            
+
+            return options;
         }
     }
 }
