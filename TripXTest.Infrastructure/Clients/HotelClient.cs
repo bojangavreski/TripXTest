@@ -5,7 +5,7 @@ using TripXTest.Application.Requests;
 using TripXTest.Infrastructure.Contracts.External;
 using TripXTest.Infrastructure.Dtos;
 
-namespace TripXTest.Infrastructure.Clients.Flight
+namespace TripXTest.Infrastructure.Clients
 {
     public class HotelClient : IHotelClient
     {

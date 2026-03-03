@@ -8,7 +8,7 @@ using TripXTest.Application.Services.Offers;
 using TripXTest.Application.Services.Search;
 using TripXTest.Core.Results;
 using TripXTest.Infrastructure;
-using TripXTest.Infrastructure.Clients.Flight;
+using TripXTest.Infrastructure.Clients;
 using TripXTest.Infrastructure.Contracts.External;
 using TripXTest.Infrastructure.Providers;
 

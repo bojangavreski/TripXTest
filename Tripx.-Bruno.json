@@ -1,0 +1,231 @@
+{
+  "name": "Tripx",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "External",
+      "items": [
+        {
+          "type": "http",
+          "name": "Get Hotels",
+          "seq": 1,
+          "request": {
+            "url": "https://tripx-test-functions.azurewebsites.net/api/SearchHotels?destinationCode=DXB",
+            "method": "GET",
+            "headers": [],
+            "params": [
+              {
+                "name": "destinationCode",
+                "value": "DXB",
+                "type": "query",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get Flights",
+          "seq": 2,
+          "request": {
+            "url": "https://tripx-test-functions.azurewebsites.net/api/SearchFlights?departureAirport=SKP&arrivalAirport=DXP",
+            "method": "GET",
+            "headers": [],
+            "params": [
+              {
+                "name": "departureAirport",
+                "value": "SKP",
+                "type": "query",
+                "enabled": true
+              },
+              {
+                "name": "arrivalAirport",
+                "value": "DXP",
+                "type": "query",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Local",
+      "items": [
+        {
+          "type": "http",
+          "name": "Search",
+          "seq": 1,
+          "request": {
+            "url": "https://localhost:7253/api/Search",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"destinationCode\": \"DXB\",\n  \"departureAirportCode\": null,\n  \"fromDate\": \"2026-05-10\",\n  \"toDate\": \"2026-05-15\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GetSearches",
+          "seq": 2,
+          "request": {
+            "url": "https://localhost:7253/api/Search?optionCode=1YxLmE",
+            "method": "GET",
+            "headers": [],
+            "params": [
+              {
+                "name": "optionCode",
+                "value": "1YxLmE",
+                "type": "query",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Book",
+          "seq": 3,
+          "request": {
+            "url": "https://localhost:7253/api/Booking?optionCode=WfTZPB",
+            "method": "POST",
+            "headers": [],
+            "params": [
+              {
+                "name": "optionCode",
+                "value": "WfTZPB",
+                "type": "query",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "CheckStatus",
+          "seq": 4,
+          "request": {
+            "url": "https://localhost:7253/api/Booking/checkStatus?bookingCode=3EAJ4G",
+            "method": "GET",
+            "headers": [],
+            "params": [
+              {
+                "name": "bookingCode",
+                "value": "3EAJ4G",
+                "type": "query",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Auth test",
+          "seq": 5,
+          "request": {
+            "url": "https://localhost:7253/api/Search/authTest",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "environments": [],
+  "brunoConfig": {
+    "version": "1",
+    "name": "Tripx",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
+}
