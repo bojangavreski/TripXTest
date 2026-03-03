@@ -19,8 +19,8 @@ namespace TripXTest.Application.Factories
                         FlightCode = flight != null ? flight.FlightCode.ToString() : String.Empty,
                         ArrivalAirport = flight != null ?  flight.ArrivalAirport.ToString() : String.Empty,
                         Price = RandomGenerator.GeneratePrice(),
-                        Offers = hotel.ResultOffers.Concat(
-                                        flight != null ? flight.ResultOffers : []).ToList()
+                        Offers = hotel.ResultOffers.Select(x => x.ToString()).Concat(
+                                            flight != null ? flight.ResultOffers.Select(x => x.ToString()) : []).ToList()
                     }).ToList();
             
             

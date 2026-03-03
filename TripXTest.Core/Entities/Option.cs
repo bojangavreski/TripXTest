@@ -12,6 +12,6 @@ namespace TripXTest.Core.Entities
 
         public required double Price { get; set; }
 
-        public IEnumerable<OfferType>? Offers { get; set; }
+        public IEnumerable<string>? Offers { get; set; }
     }
 }
