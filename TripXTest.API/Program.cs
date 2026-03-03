@@ -52,6 +52,8 @@ namespace TripXTest.API
 
             var app = builder.Build();
 
+            app.UseMiddleware<GlobalExeptionMiddleware>();
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
