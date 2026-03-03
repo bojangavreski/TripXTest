@@ -1,5 +1,5 @@
-﻿using TripXTest.Application.Contracts.Offers;
-using TripXTest.Application.Requests.Search;
+﻿using TripXTest.Application.Contracts;
+using TripXTest.Application.Requests;
 using TripXTest.Core.Entities;
 using TripXTest.Core.Enums;
 using TripXTest.Core.Results;
@@ -24,8 +24,7 @@ namespace TripXTest.Application.Services.Offers
         public bool CanApply(TravelSearchResult travelResult, SearchRequest searchRequest)
         {
             return travelResult.ResultType == SearchResultType.Hotel && 
-                  (searchRequest.FlightRequest == null ||
-                        string.IsNullOrEmpty(searchRequest.FlightRequest.DepartureAirportCode));
+                            string.IsNullOrEmpty(searchRequest.DepartureAirportCode);
         }
     }
 }

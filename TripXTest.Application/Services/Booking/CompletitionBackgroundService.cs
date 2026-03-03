@@ -10,7 +10,7 @@ namespace TripXTest.Application.Services
         private int _intervalSeconds = 30; 
         private readonly SemaphoreSlim _restartSignal = new(0, 1);
         private readonly IServiceScopeFactory _scopeFactory;
-        private Stack<string> _bookingCodes = new Stack<string>();
+        private readonly Stack<string> _bookingCodes = new Stack<string>();
 
         public CompletitionBackgroundService(IServiceScopeFactory scopeFactory)
         {
@@ -38,7 +38,7 @@ namespace TripXTest.Application.Services
                 {
                     while (await _timer.WaitForNextTickAsync(stoppingToken))
                     {
-                        if (_restartSignal.CurrentCount > 0)
+                        if (_restartSignal.CurrentCount > 0 && _bookingCodes.Count == 0)
                         {
                             break; 
                         }

@@ -1,4 +1,4 @@
-﻿using TripXTest.Application.Responses.Booking;
+﻿using TripXTest.Application.Responses;
 
 namespace TripXTest.Application.Contracts
 {

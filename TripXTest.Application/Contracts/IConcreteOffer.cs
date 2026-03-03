@@ -1,7 +1,7 @@
-﻿using TripXTest.Application.Requests.Search;
+﻿using TripXTest.Application.Requests;
 using TripXTest.Core.Results;
 
-namespace TripXTest.Application.Contracts.Offers
+namespace TripXTest.Application.Contracts
 {
     public interface IConcreteOffer
     {

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TripXTest.Application.Contracts.Search;
-using TripXTest.Application.Requests.Search;
-using TripXTest.Application.Responses.Search;
+using TripXTest.Application.Contracts;
+using TripXTest.Application.Requests;
 using TripXTest.Core.Entities;
 
 namespace TripXTest.API.Controllers
@@ -24,7 +23,7 @@ namespace TripXTest.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<TravelSearchResponse>> GetOptionByCode([FromQuery]string optionCode)
+        public ActionResult<Option> GetOptionByCode([FromQuery]string optionCode)
         {
             return Ok(_searchEngineService.GetOptionByCode(optionCode));
         }

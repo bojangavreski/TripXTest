@@ -1,4 +1,4 @@
-﻿namespace TripXTest.Application.Responses.Booking
+﻿namespace TripXTest.Application.Responses
 {
     public record BookingResponse
     {

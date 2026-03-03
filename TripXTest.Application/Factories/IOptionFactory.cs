@@ -1,5 +1,4 @@
-﻿using TripXTest.Application.Responses.Search;
-using TripXTest.Core.Entities;
+﻿using TripXTest.Core.Entities;
 using TripXTest.Core.Results;
 
 namespace TripXTest.Application.Factories

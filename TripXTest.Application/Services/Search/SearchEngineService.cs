@@ -1,9 +1,6 @@
 ﻿using TripXTest.Application.Contracts;
-using TripXTest.Application.Contracts.OfferPipeline;
-using TripXTest.Application.Contracts.Providers;
-using TripXTest.Application.Contracts.Search;
 using TripXTest.Application.Factories;
-using TripXTest.Application.Requests.Search;
+using TripXTest.Application.Requests;
 using TripXTest.Core.Entities;
 using TripXTest.Core.Results;
 

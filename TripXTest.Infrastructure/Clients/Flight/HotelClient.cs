@@ -1,6 +1,7 @@
-﻿using System.Net.Http.Json;
+﻿using Microsoft.Extensions.Configuration;
+using System.Net.Http.Json;
 using System.Web;
-using TripXTest.Application.Requests.Search;
+using TripXTest.Application.Requests;
 using TripXTest.Infrastructure.Contracts.External;
 using TripXTest.Infrastructure.Dtos;
 
@@ -8,21 +9,32 @@ namespace TripXTest.Infrastructure.Clients.Flight
 {
     public class HotelClient : IHotelClient
     {
+        private readonly IConfiguration _configuration;
+        private string _HOTELS_URL;
+        private readonly string _DESTINATION_CODE_PARAM;
+
+        public HotelClient(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            var externalClientsSection = _configuration.GetSection("ExternalApiClients");
+            _HOTELS_URL = externalClientsSection["HotelsUrl"] ?? String.Empty;
+            _DESTINATION_CODE_PARAM = externalClientsSection["DestinationCode"] ?? String.Empty;
+        }
+
+
         public async Task<IEnumerable<ExternalHotelDto>> SearchHotelAsync(SearchRequest searchRequest)
         {
             using var httpClient = new HttpClient();
 
-            var builder = new UriBuilder("https://tripx-test-functions.azurewebsites.net/api/SearchHotels");
+            var builder = new UriBuilder(_HOTELS_URL);
 
             var query = HttpUtility.ParseQueryString(builder.Query);
 
-            query["destinationCode"] = searchRequest.HotelRequest.DestinationCode;
+            query[_DESTINATION_CODE_PARAM] = searchRequest.DestinationCode;
 
             builder.Query = query.ToString();
 
             var response = await httpClient.GetAsync(builder.ToString());
-
-            response.EnsureSuccessStatusCode();
 
             return (await response.Content.ReadFromJsonAsync<IEnumerable<ExternalHotelDto>>())!;
         }

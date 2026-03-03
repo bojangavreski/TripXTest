@@ -1,7 +1,7 @@
-﻿using TripXTest.Application.Requests.Search;
+﻿using TripXTest.Application.Requests;
 using TripXTest.Core.Entities;
 
-namespace TripXTest.Application.Contracts.Search
+namespace TripXTest.Application.Contracts
 { 
     public interface ISearchEngineService
     {

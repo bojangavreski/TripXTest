@@ -1,6 +1,6 @@
 ﻿using TripXTest.Application.Contracts;
 using TripXTest.Application.Factories;
-using TripXTest.Application.Responses.Booking;
+using TripXTest.Application.Responses;
 using TripXTest.Core.Entities;
 
 namespace TripXTest.Application.Services

@@ -1,5 +1,5 @@
-﻿using TripXTest.Application.Contracts.Offers;
-using TripXTest.Application.Requests.Search;
+﻿using TripXTest.Application.Contracts;
+using TripXTest.Application.Requests;
 using TripXTest.Core.Entities;
 using TripXTest.Core.Enums;
 using TripXTest.Core.Results;
