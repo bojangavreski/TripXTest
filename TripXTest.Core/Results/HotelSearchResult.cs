@@ -1,6 +1,6 @@
 ﻿using TripXTest.Core.Enums;
 
-namespace TripXTest.Core.Entities.Search
+namespace TripXTest.Core.Results
 {
     public class HotelSearchResult : TravelSearchResult
     {

@@ -1,12 +1,12 @@
 
-using TripXTest.Application.Contracts.OfferPipeline;
-using TripXTest.Application.Contracts.Offers;
-using TripXTest.Application.Contracts.Providers;
-using TripXTest.Application.Contracts.Search;
+using TripXTest.Application.Contracts;
+using TripXTest.Application.Factories;
+using TripXTest.Application.Services;
 using TripXTest.Application.Services.OfferPipeline;
 using TripXTest.Application.Services.Offers;
 using TripXTest.Application.Services.Search;
-using TripXTest.Core.Entities.Search;
+using TripXTest.Core.Results;
+using TripXTest.Infrastructure;
 using TripXTest.Infrastructure.Clients.Flight;
 using TripXTest.Infrastructure.Contracts.External;
 using TripXTest.Infrastructure.Providers;
@@ -21,7 +21,17 @@ namespace TripXTest.API
 
             // Add services to the container.
 
+            builder.Services.AddMemoryCache();
+
+            builder.Services.AddSingleton<CompletitionBackgroundService>();
+            builder.Services.AddHostedService(sp => sp.GetRequiredService<CompletitionBackgroundService>());
+
+
+            builder.Services.AddScoped(typeof(ITripXContext<>), typeof(TripXContext<>));
+
             builder.Services.AddScoped<ISearchEngineService, SearchEngineService>();
+            builder.Services.AddScoped<IBookingService, BookingService>();
+
 
             builder.Services.AddScoped<ISearchProvider<TravelSearchResult>, FlightProvider>();
             builder.Services.AddScoped<ISearchProvider<TravelSearchResult>, HotelProvider>();
@@ -33,6 +43,8 @@ namespace TripXTest.API
 
             builder.Services.AddScoped<IConcreteOffer, LastMinuteHotelOffer>();
             builder.Services.AddScoped<IConcreteOffer, HotelOnlyOffer>();
+
+            builder.Services.AddScoped<IOptionFactory, OptionFactory>();
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

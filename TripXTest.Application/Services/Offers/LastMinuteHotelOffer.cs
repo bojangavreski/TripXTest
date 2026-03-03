@@ -1,8 +1,7 @@
-﻿using TripXTest.Application.Contracts.Offers;
-using TripXTest.Application.Requests.Search;
-using TripXTest.Core.Entities;
-using TripXTest.Core.Entities.Search;
+﻿using TripXTest.Application.Contracts;
+using TripXTest.Application.Requests;
 using TripXTest.Core.Enums;
+using TripXTest.Core.Results;
 
 namespace TripXTest.Application.Services.Offers
 {
@@ -15,7 +14,7 @@ namespace TripXTest.Application.Services.Offers
                 return travelResult;
             }
 
-            List<ResultOffer> offers = [.. travelResult.ResultOffers, new ResultOffer { Code = "LastMinuteHotel" }];
+            List<OfferType> offers = [.. travelResult.ResultOffers, OfferType.LastMinuteHotel];
 
             travelResult.ResultOffers = offers;
             return travelResult;

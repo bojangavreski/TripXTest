@@ -1,7 +1,7 @@
-﻿using TripXTest.Application.Contracts.Offers;
-using TripXTest.Application.Requests.Search;
-using TripXTest.Core.Entities;
-using TripXTest.Core.Entities.Search;
+﻿using TripXTest.Application.Contracts;
+using TripXTest.Application.Requests;
+using TripXTest.Core.Enums;
+using TripXTest.Core.Results;
 
 namespace TripXTest.Application.Services.Offers
 {
@@ -9,16 +9,21 @@ namespace TripXTest.Application.Services.Offers
     {
         public TravelSearchResult Apply(TravelSearchResult travelResult, SearchRequest searchRequest)
         {
-            List<ResultOffer> offers = [.. travelResult.ResultOffers, new ResultOffer { Code = "HotelOnlyOffer" }];
+            if(!CanApply(travelResult, searchRequest))
+            {
+                return travelResult;
+            }
+
+            List<OfferType> offers = [.. travelResult.ResultOffers, OfferType.HotelOnly];
 
             travelResult.ResultOffers = offers;
             return travelResult;
         }
-
+        
         public bool CanApply(TravelSearchResult travelResult, SearchRequest searchRequest)
         {
-            return searchRequest.FlightRequest == null ||
-                   string.IsNullOrEmpty(searchRequest.FlightRequest.DepartureAirportCode);
+            return travelResult.ResultType == SearchResultType.Hotel && 
+                            string.IsNullOrEmpty(searchRequest.DepartureAirportCode);
         }
     }
 }

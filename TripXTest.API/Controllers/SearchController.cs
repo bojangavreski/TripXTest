@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TripXTest.Application.Contracts.Search;
-using TripXTest.Application.Requests.Search;
-using TripXTest.Application.Responses.Search;
+using System.ComponentModel.DataAnnotations;
+using TripXTest.Application.Contracts;
+using TripXTest.Application.Requests;
+using TripXTest.Core.Entities;
 
 namespace TripXTest.API.Controllers
 {
@@ -16,11 +17,18 @@ namespace TripXTest.API.Controllers
             _searchEngineService = searchEngineService;
         }
 
-
         [HttpPost]
-        public async Task<ActionResult<TravelSearchResponse>> Search(SearchRequest searchRequest)
+        public async Task<ActionResult<List<Option>>> Search([FromBody]SearchRequest searchRequest)
         {
             return Ok(await _searchEngineService.SearchAsync(searchRequest));   
+        }
+
+        [HttpGet]
+        public ActionResult<Option> GetOptionByCode([FromQuery]
+                                                    [RegularExpression("^[0-9a-zA-Z]{6}$", ErrorMessage = "{0} must be 6 character alphanumeric code ")]
+                                                    [Required(ErrorMessage = "{0} is required")] string optionCode)
+        {
+            return Ok(_searchEngineService.GetOptionByCode(optionCode));
         }
     }
 }

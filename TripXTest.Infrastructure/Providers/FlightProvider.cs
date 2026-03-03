@@ -1,7 +1,7 @@
-﻿using TripXTest.Application.Contracts.Providers;
-using TripXTest.Application.Requests.Search;
-using TripXTest.Core.Entities.Search;
+﻿using TripXTest.Application.Contracts;
+using TripXTest.Application.Requests;
 using TripXTest.Core.Enums;
+using TripXTest.Core.Results;
 using TripXTest.Infrastructure.Contracts.External;
 
 namespace TripXTest.Infrastructure.Providers
@@ -19,11 +19,10 @@ namespace TripXTest.Infrastructure.Providers
 
         public async Task<IReadOnlyList<TravelSearchResult>> SearchAsync(SearchRequest searchRequest)
         {
-            if(searchRequest.FlightRequest == null || 
-                searchRequest.FlightRequest.DepartureAirportCode == null)
-                {
-                    return await Task.FromResult<IReadOnlyList<TravelSearchResult>>([]);
-                }
+            if(string.IsNullOrEmpty(searchRequest.DepartureAirportCode))
+            {
+                return await Task.FromResult<IReadOnlyList<TravelSearchResult>>([]);
+            }
 
             var flightResults = await _flightClient.SearchFlightsAsync(searchRequest);
 

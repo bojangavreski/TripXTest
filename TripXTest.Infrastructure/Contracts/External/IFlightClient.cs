@@ -1,4 +1,4 @@
-﻿using TripXTest.Application.Requests.Search;
+﻿using TripXTest.Application.Requests;
 using TripXTest.Infrastructure.Dtos;
 
 namespace TripXTest.Infrastructure.Contracts.External
