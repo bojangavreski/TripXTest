@@ -61,7 +61,7 @@ public class BookingServiceTests
     {
         // Arrange
         var bookingCode = "BK12345";
-        var expectedStatus = BookingStatus.Complete;
+        var expectedStatus = BookingStatus.Complete.ToString();
 
         _mockBookingService
             .Setup(x => x.CheckStatus(bookingCode))

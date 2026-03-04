@@ -9,6 +9,6 @@ namespace TripXTest.Application.Contracts
 
         public void CompleteBooking(string bookingCode);
 
-        public BookingStatus CheckStatus(string bookingCode);
+        public string CheckStatus(string bookingCode);
     }
 }

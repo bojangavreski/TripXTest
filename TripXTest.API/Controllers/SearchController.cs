@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using TripXTest.Application.Contracts;
 using TripXTest.Application.Requests;
@@ -29,6 +30,18 @@ namespace TripXTest.API.Controllers
                                                     [Required(ErrorMessage = "{0} is required")] string optionCode)
         {
             return Ok(_searchEngineService.GetOptionByCode(optionCode));
+        }
+
+        /// <summary>
+        ///  This is a mock ep for authorization without authentication provider
+        ///  For this to work we need to register AuthenticationHandler mock or real one with the actual scope inside
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("authTest")]
+        [Authorize(Policy = "MockHeaderAuthorization")]
+        public ActionResult<Option> TestAuthorization()
+        {
+            return Ok("This should fail");
         }
     }
 }

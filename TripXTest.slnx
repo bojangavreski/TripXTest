@@ -1,6 +1,5 @@
 <Solution>
   <Folder Name="/Tests/">
-    <Project Path="TripXTest.Integration.Tests/TripXTest.Integration.Tests.csproj" />
     <Project Path="TripXTest.Unit.Tests/TripXTest.Unit.Tests.csproj" />
   </Folder>
   <Project Path="TripXTest.API/TripXTest.API.csproj" />

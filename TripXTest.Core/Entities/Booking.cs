@@ -8,8 +8,8 @@ namespace TripXTest.Core.Entities
 
         public DateTime BookingTime { get; init; } = DateTime.Now;
 
-        public BookingStatus Status { get; set; } = BookingStatus.Pending;
+        public string Status { get; set; } = BookingStatus.Pending.ToString();
 
-        public List<OfferType>? Offers { get; set; }
+        public List<string>? Offers { get; set; }
     }
 }

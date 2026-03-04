@@ -1,0 +1,228 @@
+{
+  "info": {
+    "name": "Tripx",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "bruno",
+      "event": []
+    },
+    {
+      "name": "External",
+      "item": [
+        {
+          "name": "Get Hotels",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "https://tripx-test-functions.azurewebsites.net/api/SearchHotels?destinationCode=DXB",
+              "protocol": "https",
+              "host": [
+                "tripx-test-functions",
+                "azurewebsites",
+                "net"
+              ],
+              "path": [
+                "api",
+                "SearchHotels"
+              ],
+              "query": [
+                {
+                  "key": "destinationCode",
+                  "value": "DXB"
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get Flights",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "https://tripx-test-functions.azurewebsites.net/api/SearchFlights?departureAirport=SKP&arrivalAirport=DXP",
+              "protocol": "https",
+              "host": [
+                "tripx-test-functions",
+                "azurewebsites",
+                "net"
+              ],
+              "path": [
+                "api",
+                "SearchFlights"
+              ],
+              "query": [
+                {
+                  "key": "departureAirport",
+                  "value": "SKP"
+                },
+                {
+                  "key": "arrivalAirport",
+                  "value": "DXP"
+                }
+              ],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Local",
+      "item": [
+        {
+          "name": "Search",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "https://localhost:7253/api/Search",
+              "protocol": "https",
+              "host": [
+                "localhost:7253"
+              ],
+              "path": [
+                "api",
+                "Search"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"destinationCode\": \"DXB\",\n  \"departureAirportCode\": null,\n  \"fromDate\": \"2026-05-10\",\n  \"toDate\": \"2026-05-15\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GetSearches",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "https://localhost:7253/api/Search?optionCode=1YxLmE",
+              "protocol": "https",
+              "host": [
+                "localhost:7253"
+              ],
+              "path": [
+                "api",
+                "Search"
+              ],
+              "query": [
+                {
+                  "key": "optionCode",
+                  "value": "1YxLmE"
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Book",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "https://localhost:7253/api/Booking?optionCode=WfTZPB",
+              "protocol": "https",
+              "host": [
+                "localhost:7253"
+              ],
+              "path": [
+                "api",
+                "Booking"
+              ],
+              "query": [
+                {
+                  "key": "optionCode",
+                  "value": "WfTZPB"
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "CheckStatus",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "https://localhost:7253/api/Booking/checkStatus?bookingCode=3EAJ4G",
+              "protocol": "https",
+              "host": [
+                "localhost:7253"
+              ],
+              "path": [
+                "api",
+                "Booking",
+                "checkStatus"
+              ],
+              "query": [
+                {
+                  "key": "bookingCode",
+                  "value": "3EAJ4G"
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Auth test",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "https://localhost:7253/api/Search/authTest",
+              "protocol": "https",
+              "host": [
+                "localhost:7253"
+              ],
+              "path": [
+                "api",
+                "Search",
+                "authTest"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": []
+}

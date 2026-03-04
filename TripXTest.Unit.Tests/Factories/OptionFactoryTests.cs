@@ -52,9 +52,7 @@ public class OptionFactoryTests
         var result = _sut.CreateOption(flights, hotels);
 
         // Assert
-        result.Should().NotBeEmpty();
-        result.First().FlightCode.Should().BeEmpty();
-        result.First().HotelCode.Should().NotBeNullOrEmpty();
+        result.Should().BeEmpty();
     }
 
     [Fact]

@@ -1,0 +1,269 @@
+{
+  openapi 3.1.1,
+  info {
+    title TripXTest.API  v1,
+    version 1.0.0
+  },
+  servers [
+    {
+      url httpslocalhost7253
+    }
+  ],
+  paths {
+    apiBooking {
+      post {
+        tags [
+          Booking
+        ],
+        parameters [
+          {
+            name optionCode,
+            in query,
+            required true,
+            schema {
+              pattern ^[0-9a-zA-Z]{6}$,
+              type string
+            }
+          }
+        ],
+        responses {
+          200 {
+            description OK
+          }
+        }
+      }
+    },
+    apiBookingcheckStatus {
+      get {
+        tags [
+          Booking
+        ],
+        parameters [
+          {
+            name bookingCode,
+            in query,
+            required true,
+            schema {
+              pattern ^[0-9a-zA-Z]{6}$,
+              type string
+            }
+          }
+        ],
+        responses {
+          200 {
+            description OK
+          }
+        }
+      }
+    },
+    apiSearch {
+      post {
+        tags [
+          Search
+        ],
+        requestBody {
+          content {
+            applicationjson {
+              schema {
+                $ref #componentsschemasSearchRequest
+              }
+            },
+            textjson {
+              schema {
+                $ref #componentsschemasSearchRequest
+              }
+            },
+            application+json {
+              schema {
+                $ref #componentsschemasSearchRequest
+              }
+            }
+          },
+          required true
+        },
+        responses {
+          200 {
+            description OK,
+            content {
+              textplain {
+                schema {
+                  type array,
+                  items {
+                    $ref #componentsschemasOption
+                  }
+                }
+              },
+              applicationjson {
+                schema {
+                  type array,
+                  items {
+                    $ref #componentsschemasOption
+                  }
+                }
+              },
+              textjson {
+                schema {
+                  type array,
+                  items {
+                    $ref #componentsschemasOption
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      get {
+        tags [
+          Search
+        ],
+        parameters [
+          {
+            name optionCode,
+            in query,
+            required true,
+            schema {
+              pattern ^[0-9a-zA-Z]{6}$,
+              type string
+            }
+          }
+        ],
+        responses {
+          200 {
+            description OK,
+            content {
+              textplain {
+                schema {
+                  $ref #componentsschemasOption
+                }
+              },
+              applicationjson {
+                schema {
+                  $ref #componentsschemasOption
+                }
+              },
+              textjson {
+                schema {
+                  $ref #componentsschemasOption
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    apiSearchauthTest {
+      get {
+        tags [
+          Search
+        ],
+        responses {
+          200 {
+            description OK,
+            content {
+              textplain {
+                schema {
+                  $ref #componentsschemasOption
+                }
+              },
+              applicationjson {
+                schema {
+                  $ref #componentsschemasOption
+                }
+              },
+              textjson {
+                schema {
+                  $ref #componentsschemasOption
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  components {
+    schemas {
+      Option {
+        required [
+          hotelCode,
+          price,
+          code
+        ],
+        type object,
+        properties {
+          hotelCode {
+            type string
+          },
+          flightCode {
+            type string
+          },
+          arrivalAirport {
+            type string
+          },
+          price {
+            pattern ^-(0[1-9]d)(.d+)([eE][+-]d+)$,
+            type [
+              number,
+              string
+            ],
+            format double
+          },
+          offers {
+            type [
+              null,
+              array
+            ],
+            items {
+              type string
+            }
+          },
+          uid {
+            type string,
+            format uuid
+          },
+          code {
+            type string
+          }
+        }
+      },
+      SearchRequest {
+        required [
+          destinationCode,
+          fromDate,
+          toDate
+        ],
+        type object,
+        properties {
+          destinationCode {
+            pattern ^[A-Z]{3}$,
+            type string
+          },
+          departureAirportCode {
+            pattern ^[A-Z]{3}$,
+            type [
+              null,
+              string
+            ]
+          },
+          fromDate {
+            type string,
+            format date-time
+          },
+          toDate {
+            type string,
+            format date-time
+          }
+        }
+      }
+    }
+  },
+  tags [
+    {
+      name Booking
+    },
+    {
+      name Search
+    }
+  ]
+}

@@ -43,7 +43,13 @@ namespace TripXTest.Application.Services
 
             _bookingContext.Save(booking);
 
-            _completitionBackgroundService.TriggerWithInterval(booking.SleepTime, booking.Code);
+            Task.Run(async () =>
+            {
+                await Task.Delay(TimeSpan.FromSeconds(booking.SleepTime));
+                CompleteBooking(booking.Code);
+            });
+
+            //_completitionBackgroundService.TriggerWithInterval(booking.SleepTime, booking.Code);
 
             return new BookingResponse
             {
@@ -52,25 +58,25 @@ namespace TripXTest.Application.Services
             };
         }
 
-        public BookingStatus CheckStatus(string bookingCode)
+        public string CheckStatus(string bookingCode)
         {
 
             Booking? booking = _bookingContext.Get(bookingCode);
-            return booking == null ? throw new Exception($"Booking with code: {bookingCode} not found") : booking.Status;
+            return booking == null ? $"Booking with code: {bookingCode} not found" : booking.Status.ToString();
         }
 
         public void CompleteBooking(string bookingCode)
         {
             var booking = _bookingContext.Get(bookingCode);
 
-            if (booking.Offers != null && booking.Offers.Contains(OfferType.LastMinuteHotel))
+            if (booking.Offers != null && booking.Offers.Contains(OfferType.LastMinuteHotel.ToString()))
             {
-                booking.Status = BookingStatus.Failed;
+                booking.Status = BookingStatus.Failed.ToString();
 
             }
             else
             {
-                booking.Status = BookingStatus.Complete;
+                booking.Status = BookingStatus.Complete.ToString();
             }
 
             _bookingContext.Save(booking);
