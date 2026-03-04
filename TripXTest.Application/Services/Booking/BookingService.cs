@@ -43,7 +43,13 @@ namespace TripXTest.Application.Services
 
             _bookingContext.Save(booking);
 
-            _completitionBackgroundService.TriggerWithInterval(booking.SleepTime, booking.Code);
+            Task.Run(async () =>
+            {
+                await Task.Delay(TimeSpan.FromSeconds(booking.SleepTime));
+                CompleteBooking(booking.Code);
+            });
+
+            //_completitionBackgroundService.TriggerWithInterval(booking.SleepTime, booking.Code);
 
             return new BookingResponse
             {
