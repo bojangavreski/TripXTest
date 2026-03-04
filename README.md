@@ -1,7 +1,9 @@
 # TripXTest 
 
 **To test this application please use the collections provided, we have created collections both for Postman and Bruno, also there is a standard openapi json provided**
-**Also since this is a public repo, add the test urls from the assignment in appsettings.json** 
+
+**Also since this is a public repo, add the test urls from the assignment in appsettings.json**
+
 ## Search for arrangement
 - Retrieve data from external API providers  
 - Enrich the arrangements with Offers 
